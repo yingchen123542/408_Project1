@@ -9,18 +9,37 @@ password="QQahq34580733~",
 auth_plugin='mysql_native_password',database="RideShare")
 print(mydb)
 
-#Creating the DB:
 
 
-mydb.close()
+mycursor = mydb.cursor()
 
-create_query = '''
+mycursor.execute('''
 CREATE TABLE IF NOT EXISTS User(
-    userID INT, --odd number as ID
+    userID INT UNSIGNED PRIMARY KEY,
     findDriver BOOLEAN,
     userRating FLOAT,
     pickupLocation VARCHAR(150),
     dropoffLocation VARCHAR(150),
     PRIMARY KEY(userID)
 );
-'''
+''')
+
+#mycursor.execute("INSERT INTO User VALUES (2,0,3.5,'haha','hahaha');")
+#mydb.commit()
+
+mycursor.execute('''
+CREATE TABLE IF NOT EXISTS Driver(
+    driverID INT UNSIGNED PRIMARY KEY,
+    isInDriveMode BOOLEAN,
+    currentRating FLOAT,
+    userID INTEGER UNSIGNED,
+    FOREIGN KEY (userID) REFERENCES User(userID)
+
+);
+''')
+
+mycursor.execute("INSERT INTO Driver VALUES (2,0,3.5,2);")
+mydb.commit()
+
+
+mydb.close()
