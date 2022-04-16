@@ -40,14 +40,19 @@ def driver_exit():
 
 def is_user_matched_with_driver(userID): #returns True if is matched, returns False if not matched
     #Fetch all rows where the userID is contained within a driver
-    SQLcommand = ('''SELECT userID FROM Driver WHERE userID =''' + str(userID))
+    SQLcommand = ('''SELECT driverID FROM Driver WHERE userID =''' + str(userID))
     mycursor.execute(SQLcommand)
     myresult = mycursor.fetchall()
 
-    SQLcommand2 = ('''SELECT isInDriveMode FROM Driver WHERE userID =''' + str(userID))
-    # SQLcommand = ('''SELECT driverID FROM Driver WHERE userID =''' + str(userID))
+    print("Driver ID: " + str(myresult[0][0]))
+
+    SQLcommand2 = ('''SELECT isInDriveMode FROM Driver WHERE driverID =''' + str(myresult[0][0]))
     mycursor.execute(SQLcommand2)
     myresult2 = mycursor.fetchall()
+
+    print("Drive mode: " + str(myresult2[0][0]))
+
+
     if(myresult2[0][0] == 1):
         return True
     else:
@@ -106,9 +111,12 @@ if role%2 != 0: #user is odd number
     # look_for_driver_to_true = ('''UPDATE TABLE User SET findDriver = 1 WHERE UserID =''' + str(role))
         print("matching you with a driver now")
         exit(1)
-    elif check_userMode[0][0] == 1 and is_user_matched_with_driver(role):
+
+
+    if check_userMode[0][0] == 1 and is_user_matched_with_driver(role):
+        #is_user_matched_with_driver(role)
         print("found a driver for you")
-    print_db()
+
 
 #driver case
 else: #driver is even number
@@ -145,6 +153,8 @@ else: #driver is even number
 
     user_id = myresult[0][0]
     print(user_id) #print out userID that get matched with a driver
+    mycursor.execute("UPDATE Driver SET userID="+ str(user_id) + " WHERE driverID=" + str(role))
+    mydb.commit()
     match_user_info = ("SELECT pickupLocation,dropoffLocation,userRating FROM User WHERE userID=" + str(user_id))
     mycursor.execute(match_user_info)
     myresult = mycursor.fetchall()
@@ -160,7 +170,7 @@ else: #driver is even number
         time.sleep(2)
         print("driver with ID "+ str(role) + " is driving user with ID " + str(user_id))
 
-        print_db()
+
 
         #updating the user ID in the driver table
         update_userID = ("UPDATE TABLE Driver SET userID = " + str(user_id))
