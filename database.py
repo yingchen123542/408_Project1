@@ -13,6 +13,7 @@ print(mydb)
 
 mycursor = mydb.cursor()
 
+#build the database
 mycursor.execute('''
 CREATE TABLE IF NOT EXISTS User(
     userID INT UNSIGNED PRIMARY KEY,
@@ -24,8 +25,13 @@ CREATE TABLE IF NOT EXISTS User(
 );
 ''')
 
-#mycursor.execute("INSERT INTO User VALUES (2,0,3.5,'haha','hahaha');")
+#mycursor.execute("INSERT INTO User VALUES (10,0,3.5,'haha','hahaha');")
 #mydb.commit()
+print(mycursor.rowcount, "was inserted.")
+mycursor.execute("SELECT * FROM User")
+myresult = mycursor.fetchall()
+for x in myresult:
+  print(x)
 
 mycursor.execute('''
 CREATE TABLE IF NOT EXISTS Driver(
@@ -38,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Driver(
 );
 ''')
 
-mycursor.execute("INSERT INTO Driver VALUES (2,0,3.5,2);")
+mycursor.execute("INSERT INTO Driver VALUES (12,1,3.5,2);")
 mydb.commit()
 
 
