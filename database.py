@@ -45,23 +45,23 @@ CREATE TABLE IF NOT EXISTS User(
 );
 ''')
 
-mycursor.execute("INSERT INTO User VALUES (1,0,3.5,'haha','hahaha');")
-mydb.commit()
-mycursor.execute("INSERT INTO User VALUES (3,0,3.5,'haha','hahaha');")
-mydb.commit()
-mycursor.execute("INSERT INTO User VALUES (5,0,3.5,'haha','hahaha');")
-mydb.commit()
-mycursor.execute("INSERT INTO User VALUES (7,0,3.5,'haha','hahaha');")
-mydb.commit()
-mycursor.execute("INSERT INTO User VALUES (9,0,3.5,'haha','hahaha');")
-mydb.commit()
+# mycursor.execute("INSERT INTO User VALUES (1,0,3.5,'haha','hahaha');")
+# mydb.commit()
+# mycursor.execute("INSERT INTO User VALUES (3,0,3.5,'haha','hahaha');")
+# mydb.commit()
+# mycursor.execute("INSERT INTO User VALUES (5,0,3.5,'haha','hahaha');")
+# mydb.commit()
+# mycursor.execute("INSERT INTO User VALUES (7,0,3.5,'haha','hahaha');")
+# mydb.commit()
+# mycursor.execute("INSERT INTO User VALUES (9,0,3.5,'haha','hahaha');")
+# mydb.commit()
 
-
-print(mycursor.rowcount, "was inserted.")
-mycursor.execute("SELECT * FROM User")
-myresult = mycursor.fetchall()
-for x in myresult:
-  print(x)
+#
+# print(mycursor.rowcount, "was inserted.")
+# mycursor.execute("SELECT * FROM User")
+# myresult = mycursor.fetchall()
+# for x in myresult:
+#   print(x)
 
 
 
@@ -77,22 +77,22 @@ CREATE TABLE IF NOT EXISTS Driver(
 );
 ''')
 
-mycursor.execute("INSERT INTO Driver VALUES (2,1,3.5,1);")
-mydb.commit()
-mycursor.execute("INSERT INTO Driver VALUES (4,1,3.5,3);")
-mydb.commit()
-mycursor.execute("INSERT INTO Driver VALUES (6,1,3.5,5);")
-mydb.commit()
-mycursor.execute("INSERT INTO Driver VALUES (12,1,3.5,7);")
-mydb.commit()
-mycursor.execute("INSERT INTO Driver VALUES (8,1,3.5,9);")
-mydb.commit()
+# mycursor.execute("INSERT INTO Driver VALUES (2,0,3.5,1);")
+# mydb.commit()
+# mycursor.execute("INSERT INTO Driver VALUES (4,0,3.5,3);")
+# mydb.commit()
+# mycursor.execute("INSERT INTO Driver VALUES (6,0,3.5,5);")
+# mydb.commit()
+# mycursor.execute("INSERT INTO Driver VALUES (12,0,3.5,7);")
+# mydb.commit()
+# mycursor.execute("INSERT INTO Driver VALUES (8,0,3.5,9);")
+# mydb.commit()
 
-print(mycursor.rowcount, "was inserted.")
-mycursor.execute("SELECT * FROM Driver")
-myresult = mycursor.fetchall()
-for x in myresult:
-  print(x)
+# print(mycursor.rowcount, "was inserted.")
+# mycursor.execute("SELECT * FROM Driver")
+# myresult = mycursor.fetchall()
+# for x in myresult:
+#   print(x)
 
 
 
