@@ -16,7 +16,10 @@ def print_user_info(user_data):
     print("User star rating: " + str(user_data[0][2]))
 
 def update_drive_mode(role, shouldBeInDriveMode):
-    turn_drivemode_on = ("UPDATE Driver SET isInDriveMode="+ str(shouldBeInDriveMode) + " WHERE driverID=" + str(role))
+    if(role %2 == 0):#Driver
+        turn_drivemode_on = ("UPDATE Driver SET isInDriveMode="+ str(shouldBeInDriveMode) + " WHERE driverID=" + str(role))
+    else:#User
+        turn_drivemode_on = ("UPDATE User SET findDriver="+ str(shouldBeInDriveMode) + " WHERE userID=" + str(role))
     mycursor.execute(turn_drivemode_on)
     mydb.commit()
 
@@ -42,6 +45,11 @@ if role%2 != 0: #user is odd number
     print("this is a user")
     pickupLocation = input("enter your pick up location")
     dropoffLocation = input("enter your drop off location")
+    print("matching you with a driver now")
+    update_drive_mode(role, 1):
+    while():
+        sleep(1)
+
 #driver case
 else: #driver is even number
     print("this is a driver")
@@ -81,6 +89,11 @@ else: #driver is even number
     decision = input("do you want to drive this user? enter y for yes, and n for no")
     if decision == 'n': #driver not accepting request
         driver_exit()
+    elif decision == 'y': #driver accept the request
+        print("driving the user now")
+        print("driver with ID "+ str(role) + " is driving user with ID " + str(user_id))
+        update_drive_mode(role, 0) #set driver mode to inactive
+
 
 
 
