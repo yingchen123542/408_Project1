@@ -73,6 +73,29 @@ def print_db():
     for x in myresult:
       print(x)
 
+def rate_driver_or_user(role):
+    if (role%2 == 0):
+        rating = input("Please rate your driver out of 0 - 5")
+        mycursor.execute("SELECT currentRating FROM Driver WHERE driverID="+str(role))
+        oldDriverRating = mycursor.fetchall()
+        new_rating = str((float(rating) + oldDriverRating[0][0]) / 2)
+
+        update_db("Driver", "currentRating", new_rating, "driverID", str(role))
+    else: #update user
+        rating = input("Please rate your user out of 0 - 5")
+        mycursor.execute("SELECT userRating FROM User WHERE userID="+str(role))
+        oldUserRating = mycursor.fetchall()
+        new_rating = str((float(rating) + oldUserRating[0][0]) / 2)
+
+        update_db("User", "userRating", new_rating, "userID", str(role))
+
+
+def update_db(database, column, value, whereColumn, whereValue):
+        mycursor.execute("UPDATE " + database + " SET " + column +"= " + value +" WHERE "+ whereColumn + " = " + whereValue)
+        mydb.commit()
+
+
+
 
 # Functions end
 
@@ -86,6 +109,7 @@ print(role)
 
 #user case
 if role%2 != 0: #user is odd number
+    rate_driver_or_user(role)
     print("this is a user")
     pickupLocation_input = input("enter your pick up location")
     dropoffLocation_input = input("enter your drop off location")
@@ -128,6 +152,7 @@ if role%2 != 0: #user is odd number
 #driver case
 else: #driver is even number
     print("this is a driver")
+    rate_driver_or_user(role)
     SQLcommand = ('''SELECT isInDriveMode FROM Driver WHERE driverID =''' + str(role))
     mycursor.execute(SQLcommand)
     #print out the driver mode
