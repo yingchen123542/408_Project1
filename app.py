@@ -139,6 +139,8 @@ if role%2 != 0: #user is odd number
     if check_userMode[0][0] == 1 and is_user_matched_with_driver(role):
         #is_user_matched_with_driver(role)
         print("found a driver for you")
+        #update the user findDriver mode to inactive
+        #update_drive_mode_user_or_driver(role, 0)
         mycursor.execute("SELECT driverID FROM Driver WHERE userID=" + str(role))
         rideID = mycursor.fetchall()
         #provide the rider with a ride ID
@@ -199,9 +201,12 @@ else: #driver is even number
         driver_exit()
     elif decision == 'y': #driver accept the request
         print("driving the user now")
+        #update driver mode to inactive
+        #update_drive_mode_user_or_driver(role, 0)
         time.sleep(2)
         print("driver with ID "+ str(role) + " is driving user with ID " + str(user_id))
         rate_driver_or_user(user_id)
+
 
 
         #updating the user ID in the driver table
