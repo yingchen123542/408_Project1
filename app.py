@@ -116,6 +116,13 @@ if role%2 != 0: #user is odd number
     if check_userMode[0][0] == 1 and is_user_matched_with_driver(role):
         #is_user_matched_with_driver(role)
         print("found a driver for you")
+        mycursor.execute("SELECT driverID FROM Driver WHERE userID=" + str(role))
+        rideID = mycursor.fetchall()
+        #provide the rider with a ride ID
+        print("your ride has driver with ID: " + str(rideID[0][0]))
+        print("bringing you back to the main menu...")
+        time.sleep(2)
+        exit(1)
 
 
 #driver case
