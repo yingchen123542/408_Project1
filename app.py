@@ -74,7 +74,7 @@ def print_db():
       print(x)
 
 def rate_driver_or_user(role):
-    if (role%2 == 0):
+    if (role%2 == 0): #driver
         rating = input("Please rate your driver out of 0 - 5")
         mycursor.execute("SELECT currentRating FROM Driver WHERE driverID="+str(role))
         oldDriverRating = mycursor.fetchall()
@@ -109,7 +109,6 @@ print(role)
 
 #user case
 if role%2 != 0: #user is odd number
-    rate_driver_or_user(role)
     print("this is a user")
     pickupLocation_input = input("enter your pick up location")
     dropoffLocation_input = input("enter your drop off location")
@@ -144,6 +143,7 @@ if role%2 != 0: #user is odd number
         rideID = mycursor.fetchall()
         #provide the rider with a ride ID
         print("your ride has driver with ID: " + str(rideID[0][0]))
+        rate_driver_or_user(rideID[0][0])
         print("bringing you back to the main menu...")
         time.sleep(2)
         exit(1)
@@ -201,7 +201,7 @@ else: #driver is even number
         print("driving the user now")
         time.sleep(2)
         print("driver with ID "+ str(role) + " is driving user with ID " + str(user_id))
-
+        rate_driver_or_user(user_id)
 
 
         #updating the user ID in the driver table
