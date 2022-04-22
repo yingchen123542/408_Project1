@@ -1,0 +1,34 @@
+README 
+CPSC408 Project 1 
+Team members 
+Name: Yuki Chen 
+Email: yingchen@chapman.edu
+Student ID: 2320235 
+Name: Lucas Torti 
+Email: torti@chapman.edu 
+Student ID: 2351515
+
+References 
+https://stackoverflow.com/questions/9305669/mysql-python-connection-does-not-see-changes-to-database-made-on-another-connect 
+
+source files
+setup.sql
+database.py
+app.py
+
+Testing Instructions 
+- Prerequisites: 
+  - python3
+  - sqlite3(not needed for mac user)
+  - mysql
+  - connect mysql to datagrip
+  - pipeline local mySQL instance to Python 
+
+
+
+1. add a data souce MySQL
+2. make a local host and enter username(root) and password 
+3. Open the setup.sql in DataGrip 
+4. run "show databases" and run "use rideshare"
+
+
