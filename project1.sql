@@ -1,5 +1,0 @@
-SHOW DATABASES;
-USE RideShare;
-
-SELECT * FROM User;
-SELECT * FROM Driver;
