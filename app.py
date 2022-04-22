@@ -149,6 +149,9 @@ if role%2 != 0: #user is odd number
         #turn the driver and user drivemode to off cause they are already matched
         update_drive_mode_user_or_driver(role, 0) #turn user to inactive
         update_drive_mode_user_or_driver(rideID[0][0], 0)  #turn drive to inactive
+        #set userID to null in driver table
+        mycursor.execute("UPDATE Driver SET userID = NULL WHERE userID=" + str(role))
+
         rate_driver_or_user(rideID[0][0])
         print("bringing you back to the main menu...")
         time.sleep(2)
