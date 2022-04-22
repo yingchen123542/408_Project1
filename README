@@ -40,7 +40,7 @@ and type "SHOW DATABASES;" then "USE RideShare;", then do
 "SELECT * FROM User;", then do "SELECT * FROM Driver;"
 
 
-## running the program 
+## running the program. please follow this specific order when running the program
 1. open a terminal and run app.py 
 2. enter an odd number between 1 and 9 to run the user first 
 then follow the prompt from the code 
