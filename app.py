@@ -35,7 +35,7 @@ def update_drive_mode_user_or_driver(role, shouldBeInDriveMode):
 
 def driver_exit():
     print("have a good day, bye driver")
-    # update_drive_mode_user_or_driver(role, 0)
+    update_drive_mode_user_or_driver(role, 0)
     exit(1)
 
 def is_user_matched_with_driver(userID): #returns True if is matched, returns False if not matched
@@ -109,13 +109,8 @@ print(role)
 
 #user case
 if role%2 != 0: #user is odd number
-    print("this is a user")
-    pickupLocation_input = input("enter your pick up location")
-    dropoffLocation_input = input("enter your drop off location")
-    mycursor.execute("UPDATE User SET pickupLocation=\'" + str(pickupLocation_input) + "\' WHERE userID=" + str(role))
-    mycursor.execute("UPDATE User SET dropoffLocation=\'" + str(dropoffLocation_input) + "\' WHERE userID=" + str(role))
-    mydb.commit()
 
+    print("this is a user")
     #run the user, have them enter location and update the database(database by default set all locations to null), then turn the look for driver mode on then quit
     #run the driver to turn drive mode on
     #run the user and check if the look for driver mode is on and there is one driver has the drive mode on then it's matched
@@ -130,6 +125,12 @@ if role%2 != 0: #user is odd number
 
     if check_userMode[0][0] == 0: #user findDriver is 0, so turn it to 1
     #at the beginning, all user's LookForDriver attribute are set to false, so assume no one is looking for driver at the beginning
+        pickupLocation_input = input("enter your pick up location")
+        dropoffLocation_input = input("enter your drop off location")
+        mycursor.execute("UPDATE User SET pickupLocation=\'" + str(pickupLocation_input) + "\' WHERE userID=" + str(role))
+        mycursor.execute("UPDATE User SET dropoffLocation=\'" + str(dropoffLocation_input) + "\' WHERE userID=" + str(role))
+        mydb.commit()
+
         update_drive_mode_user_or_driver(role, 1) #update the user findDriver mode to 1
     # look_for_driver_to_true = ('''UPDATE TABLE User SET findDriver = 1 WHERE UserID =''' + str(role))
         print("matching you with a driver now")
@@ -145,6 +146,9 @@ if role%2 != 0: #user is odd number
         rideID = mycursor.fetchall()
         #provide the rider with a ride ID
         print("your ride has driver with ID: " + str(rideID[0][0]))
+        #turn the driver and user drivemode to off cause they are already matched
+        update_drive_mode_user_or_driver(role, 0) #turn user to inactive
+        update_drive_mode_user_or_driver(rideID[0][0], 0)  #turn drive to inactive
         rate_driver_or_user(rideID[0][0])
         print("bringing you back to the main menu...")
         time.sleep(2)
@@ -154,7 +158,7 @@ if role%2 != 0: #user is odd number
 #driver case
 else: #driver is even number
     print("this is a driver")
-    rate_driver_or_user(role)
+    #rate_driver_or_user(role)
     SQLcommand = ('''SELECT isInDriveMode FROM Driver WHERE driverID =''' + str(role))
     mycursor.execute(SQLcommand)
     #print out the driver mode
