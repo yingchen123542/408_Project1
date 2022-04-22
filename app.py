@@ -75,14 +75,14 @@ def print_db():
 
 def rate_driver_or_user(role):
     if (role%2 == 0): #driver
-        rating = input("Please rate your driver out of 0 - 5")
+        rating = input("rate your driver out of 0 - 5: ")
         mycursor.execute("SELECT currentRating FROM Driver WHERE driverID="+str(role))
         oldDriverRating = mycursor.fetchall()
         new_rating = str((float(rating) + oldDriverRating[0][0]) / 2)
 
         update_db("Driver", "currentRating", new_rating, "driverID", str(role))
     else: #update user
-        rating = input("Please rate your user out of 0 - 5")
+        rating = input("rate your user out of 0 - 5: ")
         mycursor.execute("SELECT userRating FROM User WHERE userID="+str(role))
         oldUserRating = mycursor.fetchall()
         new_rating = str((float(rating) + oldUserRating[0][0]) / 2)
@@ -102,7 +102,7 @@ def update_db(database, column, value, whereColumn, whereValue):
 
 
 
-role = input("what's your ID?")
+role = input("input ID: ")
 role = int(role)
 #if ID is odd then user, even then driver
 print(role)
@@ -125,8 +125,8 @@ if role%2 != 0: #user is odd number
 
     if check_userMode[0][0] == 0: #user findDriver is 0, so turn it to 1
     #at the beginning, all user's LookForDriver attribute are set to false, so assume no one is looking for driver at the beginning
-        pickupLocation_input = input("enter your pick up location")
-        dropoffLocation_input = input("enter your drop off location")
+        pickupLocation_input = input("enter your pick up location: ")
+        dropoffLocation_input = input("enter your drop off location: ")
         mycursor.execute("UPDATE User SET pickupLocation=\'" + str(pickupLocation_input) + "\' WHERE userID=" + str(role))
         mycursor.execute("UPDATE User SET dropoffLocation=\'" + str(dropoffLocation_input) + "\' WHERE userID=" + str(role))
         mydb.commit()
@@ -166,7 +166,7 @@ else: #driver is even number
     for x in myresult:
       print(x)
     if myresult[0][0]==0: #driver is not ready to drive
-       on_off = input("do you want to turn the drive mode on or not?(y/n)")
+       on_off = input("do you want to turn the drive mode on or not?(y/n): ")
        if on_off == 'n':
             driver_exit()
        else: #driver is turning the drive mode on
@@ -200,7 +200,7 @@ else: #driver is even number
     print(myresult) #print out the user's drop off and pick up locations and the rating from this specific UserID
     print_user_info(myresult)
     #prompt driver see if they want to accept the user
-    decision = input("do you want to drive this user? enter y for yes, and n for no")
+    decision = input("do you want to drive this user? enter (y/n): ")
     if decision == 'n': #driver not accepting request
         driver_exit()
     elif decision == 'y': #driver accept the request
